@@ -107,9 +107,10 @@ class SearchViewModel: FeatureFlaggable, LoaderListener {
     }
 
     var shouldShowSyncedTabsSuggestions: Bool {
-        return shouldShowFirefoxSuggestions(
+        let shouldShowSyncedTabs = shouldShowFirefoxSuggestions(
             model.shouldShowSyncedTabsSuggestions
         )
+        return shouldShowSyncedTabs && !searchQuery.isEmpty
     }
 
     var shouldShowBookmarksSuggestions: Bool {
@@ -197,6 +198,8 @@ class SearchViewModel: FeatureFlaggable, LoaderListener {
         case SearchListSection.trendingSearches.rawValue:
             guard !trendingSearches.isEmpty else { return false }
             return shouldShowTrendingSearches
+        case SearchListSection.recentSearches.rawValue:
+            return shouldShowRecentSearches
         case SearchListSection.firefoxSuggestions.rawValue:
             return hasFirefoxSuggestions
         case SearchListSection.searchSuggestions.rawValue:

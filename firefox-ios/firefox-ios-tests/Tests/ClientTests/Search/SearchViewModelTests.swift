@@ -416,6 +416,7 @@ final class SearchViewModelTests: XCTestCase {
     }
 
     func test_retrieveTrendingSearches_withSuccess_hasExpectedList() async {
+        setupNimbusTrendingSearchesTesting(isEnabled: true)
         let mockClient = MockTrendingSearchClient(result: .success(["foo", "bar"]))
         let subject = createSubject(mockTrendingClient: mockClient)
         await subject.retrieveTrendingSearches()
@@ -423,6 +424,7 @@ final class SearchViewModelTests: XCTestCase {
     }
 
     func test_retrieveTrendingSearches_withError_hasEmptyList() async {
+        setupNimbusTrendingSearchesTesting(isEnabled: true)
         enum TestError: Error { case example }
         let mockClient = MockTrendingSearchClient(result: .failure(TestError.example))
         let subject = createSubject(mockTrendingClient: mockClient)
@@ -430,7 +432,16 @@ final class SearchViewModelTests: XCTestCase {
         XCTAssertEqual(subject.trendingSearches, [])
     }
 
+    func test_retrieveTrendingSearches_withoutFFEnabled_hasEmptyList() async {
+        setupNimbusTrendingSearchesTesting(isEnabled: false)
+        let mockClient = MockTrendingSearchClient(result: .success(["foo", "bar"]))
+        let subject = createSubject(mockTrendingClient: mockClient)
+        await subject.retrieveTrendingSearches()
+        XCTAssertEqual(subject.trendingSearches, [])
+    }
+
     func test_retrieveRecentSearches_withSuccess_hasExpectedList() {
+        setupNimbusRecentSearchesTesting(isEnabled: true)
         let mockRecentSearchProvider = MockRecentSearchProvider()
         let subject = createSubject(mockRecentSearchProvider: mockRecentSearchProvider)
         subject.retrieveRecentSearches()
@@ -438,8 +449,17 @@ final class SearchViewModelTests: XCTestCase {
     }
 
     func test_retrieveRecentSearches_withNilProvider_hasEmptyList() {
+        setupNimbusRecentSearchesTesting(isEnabled: true)
         enum TestError: Error { case example }
         let subject = createSubject(mockRecentSearchProvider: nil)
+        subject.retrieveRecentSearches()
+        XCTAssertEqual(subject.recentSearches, [])
+    }
+
+    func test_retrieveRecentSearches_withoutFFEnabled_hasEmptyList() {
+        setupNimbusRecentSearchesTesting(isEnabled: false)
+        let mockRecentSearchProvider = MockRecentSearchProvider()
+        let subject = createSubject(mockRecentSearchProvider: mockRecentSearchProvider)
         subject.retrieveRecentSearches()
         XCTAssertEqual(subject.recentSearches, [])
     }
@@ -468,6 +488,14 @@ final class SearchViewModelTests: XCTestCase {
     private func setupNimbusTrendingSearchesTesting(isEnabled: Bool) {
         FxNimbus.shared.features.trendingSearchesFeature.with { _, _ in
             return TrendingSearchesFeature(
+                enabled: isEnabled
+            )
+        }
+    }
+
+    private func setupNimbusRecentSearchesTesting(isEnabled: Bool) {
+        FxNimbus.shared.features.recentSearchesFeature.with { _, _ in
+            return RecentSearchesFeature(
                 enabled: isEnabled
             )
         }

@@ -53,7 +53,6 @@ class TabTrayControllerV1: UIViewController {
     lazy var toolbar: TrayToolbar = {
         let toolbar = TrayToolbar()
         toolbar.addTabButton.addTarget(self, action: #selector(didTapToolbarAddTab), for: .touchUpInside)
-        toolbar.maskButton.addTarget(self, action: #selector(didTogglePrivateMode), for: .touchUpInside)
         toolbar.deleteButton.addTarget(self, action: #selector(didTapToolbarDelete), for: .touchUpInside)
         return toolbar
     }()
@@ -1002,6 +1001,8 @@ class TrayToolbar: UIView, Themeable, PrivateModeUI {
             make.leading.equalTo(self).offset(sideOffset)
             make.size.equalTo(toolbarButtonSize)
         }
+        maskButton.isHidden = true
+        maskButton.isEnabled = false
 
         applyTheme()
         applyUIMode(isPrivate: false)
@@ -1012,7 +1013,8 @@ class TrayToolbar: UIView, Themeable, PrivateModeUI {
     }
 
     func applyUIMode(isPrivate: Bool) {
-        maskButton.applyUIMode(isPrivate: isPrivate)
+        maskButton.isHidden = true
+        maskButton.isEnabled = false
     }
 
     func applyTheme() {

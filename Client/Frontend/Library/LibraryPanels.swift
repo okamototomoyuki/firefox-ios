@@ -25,9 +25,7 @@ protocol LibraryPanelDelegate: AnyObject {
 enum LibraryPanelType: Int {
     case bookmarks = 0
     case history = 1
-    case readingList = 2
-    case downloads = 3
-    case syncedTabs = 4
+    case downloads = 2
 }
 
 /**
@@ -69,50 +67,38 @@ class LibraryPanels {
         self.profile = profile
     }
 
-    lazy var enabledPanels = [
-        LibraryPanelDescriptor(
-            makeViewController: { profile in
-                return BookmarksPanel(profile: profile)
-            },
-            profile: profile,
-            imageName: "Bookmarks",
-            accessibilityLabel: NSLocalizedString("Bookmarks", comment: "Panel accessibility label"),
-            accessibilityIdentifier: "LibraryPanels.Bookmarks"),
+    lazy var enabledPanels: [LibraryPanelDescriptor] = {
+        var panels: [LibraryPanelDescriptor] = [
+            LibraryPanelDescriptor(
+                makeViewController: { profile in
+                    return BookmarksPanel(profile: profile)
+                },
+                profile: profile,
+                imageName: "Bookmarks",
+                accessibilityLabel: NSLocalizedString("Bookmarks", comment: "Panel accessibility label"),
+                accessibilityIdentifier: "LibraryPanels.Bookmarks"),
 
-        LibraryPanelDescriptor(
-            makeViewController: { profile in
-                return HistoryPanel(profile: profile)
-            },
-            profile: profile,
-            imageName: "History",
-            accessibilityLabel: NSLocalizedString("History", comment: "Panel accessibility label"),
-            accessibilityIdentifier: "LibraryPanels.History"),
+            LibraryPanelDescriptor(
+                makeViewController: { profile in
+                    return HistoryPanel(profile: profile)
+                },
+                profile: profile,
+                imageName: "History",
+                accessibilityLabel: NSLocalizedString("History", comment: "Panel accessibility label"),
+                accessibilityIdentifier: "LibraryPanels.History")
+        ]
 
-        LibraryPanelDescriptor(
-            makeViewController: { profile in
-                return ReadingListPanel(profile: profile)
-            },
-            profile: profile,
-            imageName: "ReadingList",
-            accessibilityLabel: NSLocalizedString("Reading list", comment: "Panel accessibility label"),
-            accessibilityIdentifier: "LibraryPanels.ReadingList"),
+        panels.append(
+            LibraryPanelDescriptor(
+                makeViewController: { profile in
+                    return DownloadsPanel(profile: profile)
+                },
+                profile: profile,
+                imageName: "Downloads",
+                accessibilityLabel: NSLocalizedString("Downloads", comment: "Panel accessibility label"),
+                accessibilityIdentifier: "LibraryPanels.Downloads")
+        )
 
-        LibraryPanelDescriptor(
-            makeViewController: { profile in
-                return DownloadsPanel(profile: profile)
-            },
-            profile: profile,
-            imageName: "Downloads",
-            accessibilityLabel: NSLocalizedString("Downloads", comment: "Panel accessibility label"),
-            accessibilityIdentifier: "LibraryPanels.Downloads"),
-
-        LibraryPanelDescriptor(
-            makeViewController: { profile in
-                return RemoteTabsPanel(profile: profile)
-            },
-            profile: profile,
-            imageName: "SyncedTabs",
-            accessibilityLabel: NSLocalizedString("Synced Tabs", comment: "Panel accessibility label"),
-            accessibilityIdentifier: "LibraryPanels.SyncedTabs"),
-    ]
+        return panels
+    }()
 }

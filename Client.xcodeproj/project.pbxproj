@@ -31,10 +31,15 @@
 		0BF0DB4A1E57B05E009172B0 /* LaunchArguments.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65075861E37F7AB006961AC /* LaunchArguments.swift */; };
 		0BF0DB941A8545800039F300 /* URLBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF0DB931A8545800039F300 /* URLBarView.swift */; };
 		0BF1B7E31AC60DEA00A7B407 /* InsetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF1B7E21AC60DEA00A7B407 /* InsetButton.swift */; };
-		0BF42D4F1A7CD09600889E28 /* TestFavicons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF42D4E1A7CD09600889E28 /* TestFavicons.swift */; };
-		0BF8F8DA1AEFF1C900E90BC2 /* noTitle.html in Resources */ = {isa = PBXBuildFile; fileRef = 0BF8F8D91AEFF1C900E90BC2 /* noTitle.html */; };
-		19DE1F671EC13B6400428B8C /* LeanplumIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE1F661EC13B6400428B8C /* LeanplumIntegration.swift */; };
-		1FCF5C2524351CB4003AB95D /* Glean.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FCF5C2324351CB4003AB95D /* Glean.framework */; };
+0BF42D4F1A7CD09600889E28 /* TestFavicons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF42D4E1A7CD09600889E28 /* TestFavicons.swift */; };
+0BF8F8DA1AEFF1C900E90BC2 /* noTitle.html in Resources */ = {isa = PBXBuildFile; fileRef = 0BF8F8D91AEFF1C900E90BC2 /* noTitle.html */; };
+19DE1F671EC13B6400428B8C /* LeanplumIntegration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19DE1F661EC13B6400428B8C /* LeanplumIntegration.swift */; };
+A3E4D6E824F9000100000010 /* FirefoxAppClipApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E4D6E824F9000100000002 /* FirefoxAppClipApp.swift */; };
+A3E4D6E824F9000100000011 /* AppClipContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E4D6E824F9000100000003 /* AppClipContentView.swift */; };
+A3E4D6E824F9000100000012 /* AppClipWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E4D6E824F9000100000005 /* AppClipWebView.swift */; };
+A3E4D6E824F9000100000012 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F84B21EF1A0910F600AAB793 /* Images.xcassets */; };
+A3E4D6E824F9000100000030 /* FirefoxAppClip.app in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A3E4D6E824F9000100000027 /* FirefoxAppClip.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+1FCF5C2524351CB4003AB95D /* Glean.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1FCF5C2324351CB4003AB95D /* Glean.framework */; };
 		274A36C9239EB94000A21587 /* LibraryPanelButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274A36C8239EB94000A21587 /* LibraryPanelButton.swift */; };
 		274A36CC239EB99400A21587 /* LibraryPanelContextMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274A36CB239EB99400A21587 /* LibraryPanelContextMenu.swift */; };
 		274A36CE239EB9EC00A21587 /* LibraryViewController+LibraryPanelDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274A36CD239EB9EC00A21587 /* LibraryViewController+LibraryPanelDelegate.swift */; };
@@ -798,7 +803,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2827316A1ABC9BE700AA1954 /* PBXContainerItemProxy */ = {
+A3E4D6E824F9000100000031 /* PBXContainerItemProxy */ = {
+isa = PBXContainerItemProxy;
+containerPortal = F84B21B61A090F8100AAB793 /* Project object */;
+proxyType = 1;
+remoteGlobalIDString = A3E4D6E824F9000100000020;
+remoteInfo = FirefoxAppClip;
+};
+2827316A1ABC9BE700AA1954 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = F84B21B61A090F8100AAB793 /* Project object */;
 			proxyType = 1;
@@ -1190,19 +1202,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F84B22531A0920C600AAB793 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				390527561C874D35007E0BB7 /* Today.appex in Embed App Extensions */,
-				397848E21ED86605004C0C0B /* NotificationService.appex in Embed App Extensions */,
-				F84B22541A0920C600AAB793 /* ShareTo.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
+F84B22531A0920C600AAB793 /* Embed App Extensions */ = {
+isa = PBXCopyFilesBuildPhase;
+buildActionMask = 2147483647;
+dstPath = "";
+dstSubfolderSpec = 13;
+files = (
+390527561C874D35007E0BB7 /* Today.appex in Embed App Extensions */,
+397848E21ED86605004C0C0B /* NotificationService.appex in Embed App Extensions */,
+F84B22541A0920C600AAB793 /* ShareTo.appex in Embed App Extensions */,
+A3E4D6E824F9000100000030 /* FirefoxAppClip.app in Embed App Extensions */,
+);
+name = "Embed App Extensions";
+runOnlyForDeploymentPostprocessing = 0;
+};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -1219,11 +1232,17 @@
 		0B7C1E941F6097AD006A8869 /* TrackingProtectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingProtectionTests.swift; sourceTree = "<group>"; };
 		0B8E0FF31A932BD500161DC3 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		0B9D40781E8D5AC80059E664 /* XCUITests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "XCUITests-Bridging-Header.h"; sourceTree = "<group>"; };
-		0BA1E00D1B03FB0B007675AF /* NetError.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = NetError.html; sourceTree = "<group>"; };
-		0BA1E02F1B051A07007675AF /* NetError.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = NetError.css; sourceTree = "<group>"; };
-		0BA896491A250E6500C1010C /* ProfileTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTest.swift; sourceTree = "<group>"; };
-		0BA8964A1A250E6500C1010C /* TestBookmarks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestBookmarks.swift; sourceTree = "<group>"; };
-		0BB5B2861AC0A2B90052877D /* SnackBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnackBar.swift; sourceTree = "<group>"; };
+0BA1E00D1B03FB0B007675AF /* NetError.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = NetError.html; sourceTree = "<group>"; };
+0BA1E02F1B051A07007675AF /* NetError.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = NetError.css; sourceTree = "<group>"; };
+0BA896491A250E6500C1010C /* ProfileTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileTest.swift; sourceTree = "<group>"; };
+0BA8964A1A250E6500C1010C /* TestBookmarks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestBookmarks.swift; sourceTree = "<group>"; };
+0BB5B2861AC0A2B90052877D /* SnackBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnackBar.swift; sourceTree = "<group>"; };
+A3E4D6E824F9000100000002 /* FirefoxAppClipApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirefoxAppClipApp.swift; sourceTree = "<group>"; };
+A3E4D6E824F9000100000003 /* AppClipContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppClipContentView.swift; sourceTree = "<group>"; };
+A3E4D6E824F9000100000005 /* AppClipWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppClipWebView.swift; sourceTree = "<group>"; };
+A3E4D6E824F9000100000004 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+A3E4D6E824F9000100000005 /* FirefoxAppClip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FirefoxAppClip.entitlements; sourceTree = "<group>"; };
+A3E4D6E824F9000100000027 /* FirefoxAppClip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FirefoxAppClip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0BB5B30A1AC0AD1F0052877D /* LoginsHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LoginsHelper.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		0BC9C9C31F26F54D000E8AB5 /* SiteLoadTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SiteLoadTest.swift; sourceTree = "<group>"; };
 		0BEF44621E31165700187C32 /* EarlGrey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EarlGrey.swift; sourceTree = "<group>"; };
@@ -1231,8 +1250,8 @@
 		0BF1B7E21AC60DEA00A7B407 /* InsetButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InsetButton.swift; sourceTree = "<group>"; };
 		0BF42D4E1A7CD09600889E28 /* TestFavicons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestFavicons.swift; sourceTree = "<group>"; };
 		0BF8F8D91AEFF1C900E90BC2 /* noTitle.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = noTitle.html; sourceTree = "<group>"; };
-		19DE1F661EC13B6400428B8C /* LeanplumIntegration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeanplumIntegration.swift; sourceTree = "<group>"; };
-		1FCF5C2324351CB4003AB95D /* Glean.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Glean.framework; path = Carthage/Build/iOS/Glean.framework; sourceTree = "<group>"; };
+                19DE1F661EC13B6400428B8C /* LeanplumIntegration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeanplumIntegration.swift; sourceTree = "<group>"; };
+                1FCF5C2324351CB4003AB95D /* Glean.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Glean.framework; path = Carthage/Build/iOS/Glean.framework; sourceTree = "<group>"; };
 		274A36C8239EB94000A21587 /* LibraryPanelButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryPanelButton.swift; sourceTree = "<group>"; };
 		274A36CB239EB99400A21587 /* LibraryPanelContextMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryPanelContextMenu.swift; sourceTree = "<group>"; };
 		274A36CD239EB9EC00A21587 /* LibraryViewController+LibraryPanelDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LibraryViewController+LibraryPanelDelegate.swift"; sourceTree = "<group>"; };
@@ -1987,7 +2006,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2827315A1ABC9BE600AA1954 /* Frameworks */ = {
+A3E4D6E824F9000100000023 /* Frameworks */ = {
+isa = PBXFrameworksBuildPhase;
+buildActionMask = 2147483647;
+files = (
+);
+runOnlyForDeploymentPostprocessing = 0;
+};
+2827315A1ABC9BE600AA1954 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -3372,19 +3398,20 @@
 			name = Delegates;
 			sourceTree = "<group>";
 		};
-		E689C6FF1E0C716F008BAADB /* Entitlements */ = {
-			isa = PBXGroup;
-			children = (
-				E6F738761EB7A97500B50143 /* FirefoxApplication.entitlements */,
-				E6F738751EB7A97100B50143 /* FirefoxBetaApplication.entitlements */,
-				E6F738741EB7A8D300B50143 /* FennecApplication.entitlements */,
-				E62AC15F1E956AFC00843532 /* FennecEnterpriseApplication.entitlements */,
-				B615FA3023A0257500724C0B /* XRViewerApplication.entitlements */,
-				B615FA2F23A0252800724C0B /* XRViewerDevApplication.entitlements */,
-			);
-			path = Entitlements;
-			sourceTree = "<group>";
-		};
+E689C6FF1E0C716F008BAADB /* Entitlements */ = {
+isa = PBXGroup;
+children = (
+E6F738761EB7A97500B50143 /* FirefoxApplication.entitlements */,
+E6F738751EB7A97100B50143 /* FirefoxBetaApplication.entitlements */,
+E6F738741EB7A8D300B50143 /* FennecApplication.entitlements */,
+E62AC15F1E956AFC00843532 /* FennecEnterpriseApplication.entitlements */,
+B615FA3023A0257500724C0B /* XRViewerApplication.entitlements */,
+B615FA2F23A0252800724C0B /* XRViewerDevApplication.entitlements */,
+A3E4D6E824F9000100000005 /* FirefoxAppClip.entitlements */,
+);
+path = Entitlements;
+sourceTree = "<group>";
+};
 		E68E7ADF1CAC209000FDCA76 /* PasscodeConfiguration */ = {
 			isa = PBXGroup;
 			children = (
@@ -3611,43 +3638,56 @@
 			);
 			sourceTree = "<group>";
 		};
-		F84B21BF1A090F8100AAB793 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				F84B21BE1A090F8100AAB793 /* Client.app */,
-				F84B21D31A090F8100AAB793 /* ClientTests.xctest */,
-				F84B22491A0920C600AAB793 /* ShareTo.appex */,
-				D39FA15F1A83E0EC00EE869C /* UITests.xctest */,
-				288A2D861AB8B3260023ABC3 /* Shared.framework */,
-				2FCAE21A1ABB51F800877008 /* Storage.framework */,
-				2FCAE2241ABB51F800877008 /* StorageTests.xctest */,
-				2FA435FB1ABB83B4008031D1 /* Account.framework */,
-				2FA436051ABB83B4008031D1 /* AccountTests.xctest */,
-				2827315E1ABC9BE600AA1954 /* Sync.framework */,
-				282731681ABC9BE700AA1954 /* SyncTests.xctest */,
-				E6F9650C1B2F1CF20034B023 /* SharedTests.xctest */,
-				7BEB644D1C7345600092C02E /* L10nSnapshotTests.xctest */,
-				7BEB645A1C7345990092C02E /* MarketingUITests.xctest */,
-				3905274A1C874D35007E0BB7 /* Today.appex */,
-				3BFE4B071D342FB800DDF53F /* XCUITests.xctest */,
-				3B43E3D01D95C48D00BBA9DB /* StoragePerfTests.xctest */,
-				E69DB0751E97DEA9008A67E6 /* SyncTelemetry.framework */,
-				E69DB07D1E97DEA9008A67E6 /* SyncTelemetryTests.xctest */,
-				397848DB1ED86605004C0C0B /* NotificationService.appex */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		F84B21C01A090F8100AAB793 /* Client */ = {
-			isa = PBXGroup;
-			children = (
-				C86E4F6F2493BA8E0087BFD9 /* Generated */,
-				7B2142FC1E5E055000CDD3FC /* InfoPlist.strings */,
-				F84B22431A09165600AAB793 /* Info.plist */,
-				F84B21EB1A0910F600AAB793 /* Assets */,
-				F84B21E41A0910F600AAB793 /* Application */,
-				E60961841B62B7E100DD640F /* Configuration */,
-				E689C6FF1E0C716F008BAADB /* Entitlements */,
+F84B21BF1A090F8100AAB793 /* Products */ = {
+isa = PBXGroup;
+children = (
+F84B21BE1A090F8100AAB793 /* Client.app */,
+F84B21D31A090F8100AAB793 /* ClientTests.xctest */,
+F84B22491A0920C600AAB793 /* ShareTo.appex */,
+D39FA15F1A83E0EC00EE869C /* UITests.xctest */,
+288A2D861AB8B3260023ABC3 /* Shared.framework */,
+2FCAE21A1ABB51F800877008 /* Storage.framework */,
+2FCAE2241ABB51F800877008 /* StorageTests.xctest */,
+2FA435FB1ABB83B4008031D1 /* Account.framework */,
+2FA436051ABB83B4008031D1 /* AccountTests.xctest */,
+2827315E1ABC9BE600AA1954 /* Sync.framework */,
+282731681ABC9BE700AA1954 /* SyncTests.xctest */,
+E6F9650C1B2F1CF20034B023 /* SharedTests.xctest */,
+7BEB644D1C7345600092C02E /* L10nSnapshotTests.xctest */,
+7BEB645A1C7345990092C02E /* MarketingUITests.xctest */,
+3905274A1C874D35007E0BB7 /* Today.appex */,
+3BFE4B071D342FB800DDF53F /* XCUITests.xctest */,
+3B43E3D01D95C48D00BBA9DB /* StoragePerfTests.xctest */,
+E69DB0751E97DEA9008A67E6 /* SyncTelemetry.framework */,
+E69DB07D1E97DEA9008A67E6 /* SyncTelemetryTests.xctest */,
+397848DB1ED86605004C0C0B /* NotificationService.appex */,
+A3E4D6E824F9000100000027 /* FirefoxAppClip.app */,
+);
+name = Products;
+sourceTree = "<group>";
+};
+A3E4D6E824F9000100000001 /* AppClip */ = {
+isa = PBXGroup;
+children = (
+                                A3E4D6E824F9000100000002 /* FirefoxAppClipApp.swift */,
+                                A3E4D6E824F9000100000003 /* AppClipContentView.swift */,
+                                A3E4D6E824F9000100000005 /* AppClipWebView.swift */,
+A3E4D6E824F9000100000004 /* Info.plist */,
+);
+path = AppClip;
+sourceTree = "<group>";
+};
+F84B21C01A090F8100AAB793 /* Client */ = {
+isa = PBXGroup;
+children = (
+C86E4F6F2493BA8E0087BFD9 /* Generated */,
+7B2142FC1E5E055000CDD3FC /* InfoPlist.strings */,
+F84B22431A09165600AAB793 /* Info.plist */,
+F84B21EB1A0910F600AAB793 /* Assets */,
+F84B21E41A0910F600AAB793 /* Application */,
+A3E4D6E824F9000100000001 /* AppClip */,
+E60961841B62B7E100DD640F /* Configuration */,
+E689C6FF1E0C716F008BAADB /* Entitlements */,
 				28EADE5C1AFC3A6D007FB2FB /* Extensions */,
 				F84B21F11A0910F600AAB793 /* Frontend */,
 				39A359BD1BFCCE7B006B9E87 /* Helpers */,
@@ -3717,8 +3757,8 @@
 		F84B21E41A0910F600AAB793 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				19DE1F661EC13B6400428B8C /* LeanplumIntegration.swift */,
-				E652F6F91BF66A79007FFDD6 /* Delegates */,
+                                19DE1F661EC13B6400428B8C /* LeanplumIntegration.swift */,
+                                E652F6F91BF66A79007FFDD6 /* Delegates */,
 				D81E377D2242FF61006AC72D /* Client-Bridging-Header.h */,
 				E40FAB0B1A7ABB77009CB80D /* WebServer.swift */,
 				E4D6BEB81A0930EC00F538BD /* LaunchScreen.xib */,
@@ -4218,26 +4258,43 @@
 			productReference = E69DB07D1E97DEA9008A67E6 /* SyncTelemetryTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		E6F9650B1B2F1CF20034B023 /* SharedTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E6F965381B2F1CF20034B023 /* Build configuration list for PBXNativeTarget "SharedTests" */;
-			buildPhases = (
-				E6F965081B2F1CF20034B023 /* Sources */,
-				E6F965091B2F1CF20034B023 /* Frameworks */,
-				E6F9650A1B2F1CF20034B023 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E6F965141B2F1CF20034B023 /* PBXTargetDependency */,
-				E6F9653A1B2F1D330034B023 /* PBXTargetDependency */,
-			);
-			name = SharedTests;
-			productName = SharedTests;
-			productReference = E6F9650C1B2F1CF20034B023 /* SharedTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		F84B21BD1A090F8100AAB793 /* Client */ = {
+E6F9650B1B2F1CF20034B023 /* SharedTests */ = {
+isa = PBXNativeTarget;
+buildConfigurationList = E6F965381B2F1CF20034B023 /* Build configuration list for PBXNativeTarget "SharedTests" */;
+buildPhases = (
+E6F965081B2F1CF20034B023 /* Sources */,
+E6F965091B2F1CF20034B023 /* Frameworks */,
+E6F9650A1B2F1CF20034B023 /* Resources */,
+);
+buildRules = (
+);
+dependencies = (
+E6F965141B2F1CF20034B023 /* PBXTargetDependency */,
+E6F9653A1B2F1D330034B023 /* PBXTargetDependency */,
+);
+name = SharedTests;
+productName = SharedTests;
+productReference = E6F9650C1B2F1CF20034B023 /* SharedTests.xctest */;
+productType = "com.apple.product-type.bundle.unit-test";
+};
+A3E4D6E824F9000100000020 /* FirefoxAppClip */ = {
+isa = PBXNativeTarget;
+buildConfigurationList = A3E4D6E824F9000100000024 /* Build configuration list for PBXNativeTarget "FirefoxAppClip" */;
+buildPhases = (
+A3E4D6E824F9000100000021 /* Sources */,
+A3E4D6E824F9000100000023 /* Frameworks */,
+A3E4D6E824F9000100000022 /* Resources */,
+);
+buildRules = (
+);
+dependencies = (
+);
+name = FirefoxAppClip;
+productName = FirefoxAppClip;
+productReference = A3E4D6E824F9000100000027 /* FirefoxAppClip.app */;
+productType = "com.apple.product-type.application.on-demand-install-capable";
+};
+F84B21BD1A090F8100AAB793 /* Client */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F84B21DD1A090F8100AAB793 /* Build configuration list for PBXNativeTarget "Client" */;
 			buildPhases = (
@@ -4252,17 +4309,18 @@
 			);
 			buildRules = (
 			);
-			dependencies = (
-				E4A888191A95679500CDC337 /* PBXTargetDependency */,
-				2FA436111ABB83B4008031D1 /* PBXTargetDependency */,
-				288A2D9C1AB8B3260023ABC3 /* PBXTargetDependency */,
-				2FCAE2301ABB51F800877008 /* PBXTargetDependency */,
-				282731741ABC9BE700AA1954 /* PBXTargetDependency */,
-				E69DB0891E97DEAA008A67E6 /* PBXTargetDependency */,
-				397848E11ED86605004C0C0B /* PBXTargetDependency */,
-				F84B22521A0920C600AAB793 /* PBXTargetDependency */,
-				390527551C874D35007E0BB7 /* PBXTargetDependency */,
-			);
+dependencies = (
+E4A888191A95679500CDC337 /* PBXTargetDependency */,
+2FA436111ABB83B4008031D1 /* PBXTargetDependency */,
+288A2D9C1AB8B3260023ABC3 /* PBXTargetDependency */,
+2FCAE2301ABB51F800877008 /* PBXTargetDependency */,
+282731741ABC9BE700AA1954 /* PBXTargetDependency */,
+E69DB0891E97DEAA008A67E6 /* PBXTargetDependency */,
+397848E11ED86605004C0C0B /* PBXTargetDependency */,
+F84B22521A0920C600AAB793 /* PBXTargetDependency */,
+390527551C874D35007E0BB7 /* PBXTargetDependency */,
+A3E4D6E824F9000100000032 /* PBXTargetDependency */,
+);
 			name = Client;
 			productName = Client;
 			productReference = F84B21BE1A090F8100AAB793 /* Client.app */;
@@ -4420,11 +4478,11 @@
 						LastSwiftMigration = 1000;
 						TestTargetID = F84B21BD1A090F8100AAB793;
 					};
-					F84B21BD1A090F8100AAB793 = {
-						CreatedOnToolsVersion = 6.1;
-						LastSwiftMigration = 1000;
-						ProvisioningStyle = Automatic;
-						SystemCapabilities = {
+F84B21BD1A090F8100AAB793 = {
+CreatedOnToolsVersion = 6.1;
+LastSwiftMigration = 1000;
+ProvisioningStyle = Automatic;
+SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 1;
 							};
@@ -4442,13 +4500,18 @@
 							};
 						};
 					};
-					F84B21D21A090F8100AAB793 = {
-						CreatedOnToolsVersion = 6.1;
-						DevelopmentTeam = 43AQ936H96;
-						LastSwiftMigration = 1000;
-						TestTargetID = F84B21BD1A090F8100AAB793;
-					};
-					F84B22481A0920C600AAB793 = {
+F84B21D21A090F8100AAB793 = {
+CreatedOnToolsVersion = 6.1;
+DevelopmentTeam = 43AQ936H96;
+LastSwiftMigration = 1000;
+TestTargetID = F84B21BD1A090F8100AAB793;
+};
+A3E4D6E824F9000100000020 = {
+CreatedOnToolsVersion = 14.0;
+DevelopmentTeam = 43AQ936H96;
+ProvisioningStyle = Automatic;
+};
+F84B22481A0920C600AAB793 = {
 						CreatedOnToolsVersion = 6.1;
 						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
@@ -4484,11 +4547,12 @@
 				},
 			);
 			projectRoot = "";
-			targets = (
-				F84B21BD1A090F8100AAB793 /* Client */,
-				397848DA1ED86605004C0C0B /* NotificationService */,
-				F84B22481A0920C600AAB793 /* ShareTo */,
-				390527491C874D35007E0BB7 /* Today */,
+targets = (
+F84B21BD1A090F8100AAB793 /* Client */,
+397848DA1ED86605004C0C0B /* NotificationService */,
+F84B22481A0920C600AAB793 /* ShareTo */,
+A3E4D6E824F9000100000020 /* FirefoxAppClip */,
+390527491C874D35007E0BB7 /* Today */,
 				288A2D851AB8B3260023ABC3 /* Shared */,
 				2FCAE2191ABB51F800877008 /* Storage */,
 				2FA435FA1ABB83B4008031D1 /* Account */,
@@ -4527,7 +4591,15 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
-		2827315C1ABC9BE600AA1954 /* Resources */ = {
+A3E4D6E824F9000100000022 /* Resources */ = {
+isa = PBXResourcesBuildPhase;
+buildActionMask = 2147483647;
+files = (
+A3E4D6E824F9000100000012 /* Images.xcassets in Resources */,
+);
+runOnlyForDeploymentPostprocessing = 0;
+};
+2827315C1ABC9BE600AA1954 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -4857,7 +4929,17 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		282731591ABC9BE600AA1954 /* Sources */ = {
+A3E4D6E824F9000100000021 /* Sources */ = {
+isa = PBXSourcesBuildPhase;
+buildActionMask = 2147483647;
+            files = (
+                    A3E4D6E824F9000100000011 /* AppClipContentView.swift in Sources */,
+                    A3E4D6E824F9000100000012 /* AppClipWebView.swift in Sources */,
+                    A3E4D6E824F9000100000010 /* FirefoxAppClipApp.swift in Sources */,
+            );
+runOnlyForDeploymentPostprocessing = 0;
+};
+282731591ABC9BE600AA1954 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -5499,8 +5581,8 @@
 				8D8251811F4DE67F00780643 /* AdvancedAccountSettingViewController.swift in Sources */,
 				E633E2DA1C21EAF8001FFF6C /* LoginDetailViewController.swift in Sources */,
 				59A68B280D62462B85CF57A4 /* HistoryPanel.swift in Sources */,
-				19DE1F671EC13B6400428B8C /* LeanplumIntegration.swift in Sources */,
-				E65D89181C8647420006EA35 /* AppAuthenticator.swift in Sources */,
+                                19DE1F671EC13B6400428B8C /* LeanplumIntegration.swift in Sources */,
+                                E65D89181C8647420006EA35 /* AppAuthenticator.swift in Sources */,
 				C400467C1CF4E43E00B08303 /* BackForwardListViewController.swift in Sources */,
 				D3972BF31C22412B00035B87 /* ShareExtensionHelper.swift in Sources */,
 				F35B8D2D1D6383E9008E3D61 /* SessionRestoreHelper.swift in Sources */,
@@ -5604,7 +5686,12 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2827316B1ABC9BE700AA1954 /* PBXTargetDependency */ = {
+A3E4D6E824F9000100000032 /* PBXTargetDependency */ = {
+isa = PBXTargetDependency;
+target = A3E4D6E824F9000100000020 /* FirefoxAppClip */;
+targetProxy = A3E4D6E824F9000100000031 /* PBXContainerItemProxy */;
+};
+2827316B1ABC9BE700AA1954 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2827315D1ABC9BE600AA1954 /* Sync */;
 			targetProxy = 2827316A1ABC9BE700AA1954 /* PBXContainerItemProxy */;
@@ -10018,12 +10105,12 @@
 			};
 			name = Fennec;
 		};
-		F84B22561A0920C600AAB793 /* Fennec */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_ENTITLEMENTS = "$(inherit)Extensions/Entitlements/Fennec.entitlements";
+F84B22561A0920C600AAB793 /* Fennec */ = {
+isa = XCBuildConfiguration;
+buildSettings = {
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+APPLICATION_EXTENSION_API_ONLY = YES;
+CODE_SIGN_ENTITLEMENTS = "$(inherit)Extensions/Entitlements/Fennec.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
@@ -10044,8 +10131,146 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Fennec;
-		};
+name = Fennec;
+};
+A3E4D6E824F9000100000040 /* Fennec */ = {
+isa = XCBuildConfiguration;
+baseConfigurationReference = E60961861B62B8A700DD640F /* Fennec.xcconfig */;
+buildSettings = {
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+CODE_SIGN_ENTITLEMENTS = Client/Entitlements/FirefoxAppClip.entitlements;
+CODE_SIGN_IDENTITY = "Apple Development";
+CODE_SIGN_STYLE = Automatic;
+DEVELOPMENT_TEAM = 43AQ936H96;
+ENABLE_BITCODE = NO;
+INFOPLIST_FILE = Client/AppClip/Info.plist;
+IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+OTHER_SWIFT_FLAGS = "-DMOZ_CHANNEL_FENNEC -DMOZ_TARGET_APPCLIP";
+PRODUCT_BUNDLE_IDENTIFIER = "$(MOZ_BUNDLE_ID).AppClip";
+PRODUCT_NAME = "$(TARGET_NAME)";
+SKIP_INSTALL = YES;
+SWIFT_VERSION = 5.0;
+TARGETED_DEVICE_FAMILY = "1,2";
+};
+name = Fennec;
+};
+A3E4D6E824F9000100000041 /* XRViewerDev */ = {
+isa = XCBuildConfiguration;
+baseConfigurationReference = B6E46811239EB99B007468EC /* XRViewerDev.xcconfig */;
+buildSettings = {
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+CODE_SIGN_ENTITLEMENTS = Client/Entitlements/FirefoxAppClip.entitlements;
+CODE_SIGN_IDENTITY = "Apple Development";
+CODE_SIGN_STYLE = Automatic;
+DEVELOPMENT_TEAM = 43AQ936H96;
+ENABLE_BITCODE = NO;
+INFOPLIST_FILE = Client/AppClip/Info.plist;
+IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+OTHER_SWIFT_FLAGS = "-DMOZ_CHANNEL_FENNEC -DMOZ_TARGET_APPCLIP -DXRVIEWERDEV -DWEBXR";
+PRODUCT_BUNDLE_IDENTIFIER = "$(MOZ_BUNDLE_ID).AppClip";
+PRODUCT_NAME = "$(TARGET_NAME)";
+SKIP_INSTALL = YES;
+SWIFT_VERSION = 5.0;
+TARGETED_DEVICE_FAMILY = "1,2";
+};
+name = XRViewerDev;
+};
+A3E4D6E824F9000100000042 /* Fennec_Enterprise */ = {
+isa = XCBuildConfiguration;
+baseConfigurationReference = E6DCC1ED1DCBB6AA00CEC4B7 /* Fennec.enterprise.xcconfig */;
+buildSettings = {
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+CODE_SIGN_ENTITLEMENTS = Client/Entitlements/FirefoxAppClip.entitlements;
+CODE_SIGN_IDENTITY = "Apple Development";
+CODE_SIGN_STYLE = Automatic;
+DEVELOPMENT_TEAM = 43AQ936H96;
+ENABLE_BITCODE = NO;
+INFOPLIST_FILE = Client/AppClip/Info.plist;
+IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+OTHER_SWIFT_FLAGS = "-DMOZ_CHANNEL_FENNEC -DMOZ_TARGET_APPCLIP";
+PRODUCT_BUNDLE_IDENTIFIER = "$(MOZ_BUNDLE_ID).AppClip";
+PRODUCT_NAME = "$(TARGET_NAME)";
+SKIP_INSTALL = YES;
+SWIFT_VERSION = 5.0;
+TARGETED_DEVICE_FAMILY = "1,2";
+};
+name = Fennec_Enterprise;
+};
+A3E4D6E824F9000100000043 /* Firefox */ = {
+isa = XCBuildConfiguration;
+baseConfigurationReference = E60961891B62B8C800DD640F /* Firefox.xcconfig */;
+buildSettings = {
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+CODE_SIGN_ENTITLEMENTS = Client/Entitlements/FirefoxAppClip.entitlements;
+CODE_SIGN_IDENTITY = "Apple Development";
+CODE_SIGN_STYLE = Automatic;
+DEVELOPMENT_TEAM = 43AQ936H96;
+ENABLE_BITCODE = NO;
+INFOPLIST_FILE = Client/AppClip/Info.plist;
+IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+OTHER_SWIFT_FLAGS = "-DMOZ_CHANNEL_RELEASE -DMOZ_TARGET_APPCLIP";
+PRODUCT_BUNDLE_IDENTIFIER = "$(MOZ_BUNDLE_ID).AppClip";
+PRODUCT_NAME = "$(TARGET_NAME)";
+SKIP_INSTALL = YES;
+SWIFT_VERSION = 5.0;
+TARGETED_DEVICE_FAMILY = "1,2";
+};
+name = Firefox;
+};
+A3E4D6E824F9000100000044 /* XRViewer */ = {
+isa = XCBuildConfiguration;
+baseConfigurationReference = B6E4680E239EB969007468EC /* XRViewer.xcconfig */;
+buildSettings = {
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+CODE_SIGN_ENTITLEMENTS = Client/Entitlements/FirefoxAppClip.entitlements;
+CODE_SIGN_IDENTITY = "Apple Development";
+CODE_SIGN_STYLE = Automatic;
+DEVELOPMENT_TEAM = 43AQ936H96;
+ENABLE_BITCODE = NO;
+INFOPLIST_FILE = Client/AppClip/Info.plist;
+IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+OTHER_SWIFT_FLAGS = "-DMOZ_CHANNEL_RELEASE -DMOZ_TARGET_APPCLIP -DWEBXR";
+PRODUCT_BUNDLE_IDENTIFIER = "$(MOZ_BUNDLE_ID).AppClip";
+PRODUCT_NAME = "$(TARGET_NAME)";
+SKIP_INSTALL = YES;
+SWIFT_VERSION = 5.0;
+TARGETED_DEVICE_FAMILY = "1,2";
+};
+name = XRViewer;
+};
+A3E4D6E824F9000100000045 /* FirefoxBeta */ = {
+isa = XCBuildConfiguration;
+baseConfigurationReference = E6FCC43C1C40565200DF6113 /* FirefoxBeta.xcconfig */;
+buildSettings = {
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+CODE_SIGN_ENTITLEMENTS = Client/Entitlements/FirefoxAppClip.entitlements;
+CODE_SIGN_IDENTITY = "Apple Development";
+CODE_SIGN_STYLE = Automatic;
+DEVELOPMENT_TEAM = 43AQ936H96;
+ENABLE_BITCODE = NO;
+INFOPLIST_FILE = Client/AppClip/Info.plist;
+IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+OTHER_SWIFT_FLAGS = "-DMOZ_CHANNEL_BETA -DMOZ_TARGET_APPCLIP";
+PRODUCT_BUNDLE_IDENTIFIER = "$(MOZ_BUNDLE_ID).AppClip";
+PRODUCT_NAME = "$(TARGET_NAME)";
+SKIP_INSTALL = YES;
+SWIFT_VERSION = 5.0;
+TARGETED_DEVICE_FAMILY = "1,2";
+};
+name = FirefoxBeta;
+};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -10310,19 +10535,32 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Fennec;
 		};
-		F84B22551A0920C600AAB793 /* Build configuration list for PBXNativeTarget "ShareTo" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F84B22561A0920C600AAB793 /* Fennec */,
-				B6E46815239EB9DD007468EC /* XRViewerDev */,
-				E6DCC2081DCBB6F100CEC4B7 /* Fennec_Enterprise */,
-				E448FCA01AEE7A6000869B6C /* Firefox */,
-				B6E4682A239EB9E5007468EC /* XRViewer */,
-				E6FCC42D1C40562400DF6113 /* FirefoxBeta */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Fennec;
-		};
+F84B22551A0920C600AAB793 /* Build configuration list for PBXNativeTarget "ShareTo" */ = {
+isa = XCConfigurationList;
+buildConfigurations = (
+F84B22561A0920C600AAB793 /* Fennec */,
+B6E46815239EB9DD007468EC /* XRViewerDev */,
+E6DCC2081DCBB6F100CEC4B7 /* Fennec_Enterprise */,
+E448FCA01AEE7A6000869B6C /* Firefox */,
+B6E4682A239EB9E5007468EC /* XRViewer */,
+E6FCC42D1C40562400DF6113 /* FirefoxBeta */,
+);
+defaultConfigurationIsVisible = 0;
+defaultConfigurationName = Fennec;
+};
+A3E4D6E824F9000100000024 /* Build configuration list for PBXNativeTarget "FirefoxAppClip" */ = {
+isa = XCConfigurationList;
+buildConfigurations = (
+A3E4D6E824F9000100000040 /* Fennec */,
+A3E4D6E824F9000100000041 /* XRViewerDev */,
+A3E4D6E824F9000100000042 /* Fennec_Enterprise */,
+A3E4D6E824F9000100000043 /* Firefox */,
+A3E4D6E824F9000100000044 /* XRViewer */,
+A3E4D6E824F9000100000045 /* FirefoxBeta */,
+);
+defaultConfigurationIsVisible = 0;
+defaultConfigurationName = Fennec;
+};
 /* End XCConfigurationList section */
 	};
 	rootObject = F84B21B61A090F8100AAB793 /* Project object */;

@@ -62,14 +62,6 @@ extension PhotonActionSheetProtocol {
             }
         }
 
-        let addReadingList = PhotonActionSheetItem(title: Strings.AppMenuAddToReadingListTitleString, iconString: "addToReadingList") { _, _ in
-            guard let url = tab.url?.displayURL else { return }
-
-            self.profile.readingList.createRecordWithURL(url.absoluteString, title: tab.title ?? "", addedBy: UIDevice.current.name)
-            UnifiedTelemetry.recordEvent(category: .action, method: .add, object: .readingListItem, value: .pageActionMenu)
-            success(Strings.AppMenuAddToReadingListConfirmMessage, .addToReadingList)
-        }
-
         let bookmarkPage = PhotonActionSheetItem(title: Strings.AppMenuAddBookmarkTitleString, iconString: "menu-Bookmark") { _, _ in
             guard let url = tab.canonicalURL?.displayURL,
                 let bvc = presentableVC as? BrowserViewController else {
@@ -121,26 +113,6 @@ extension PhotonActionSheetProtocol {
                     success(Strings.AppMenuRemovePinFromTopSitesConfirmMessage, .removePinPage)
                 }
             }
-        }
-
-        let sendToDevice = PhotonActionSheetItem(title: Strings.SendToDeviceTitle, iconString: "menu-Send-to-Device") { _, _ in
-            guard let bvc = presentableVC as? PresentableVC & InstructionsViewControllerDelegate & DevicePickerViewControllerDelegate else { return }
-            if !self.profile.hasAccount() {
-                let instructionsViewController = InstructionsViewController()
-                instructionsViewController.delegate = bvc
-                let navigationController = UINavigationController(rootViewController: instructionsViewController)
-                navigationController.modalPresentationStyle = .formSheet
-                bvc.present(navigationController, animated: true, completion: nil)
-                return
-            }
-
-            let devicePickerViewController = DevicePickerViewController()
-            devicePickerViewController.pickerDelegate = bvc
-            devicePickerViewController.profile = self.profile
-            devicePickerViewController.profileNeedsShutdown = false
-            let navigationController = UINavigationController(rootViewController: devicePickerViewController)
-            navigationController.modalPresentationStyle = .formSheet
-            bvc.present(navigationController, animated: true, completion: nil)
         }
 
         let sharePage = PhotonActionSheetItem(title: Strings.AppMenuSharePageTitleString, iconString: "action_share") { _, _ in
@@ -227,20 +199,16 @@ extension PhotonActionSheetProtocol {
             bvc.scrollController.hideToolbars(animated: true)
         }
         
-        var mainActions = [sharePage]
+        var mainActions: [PhotonActionSheetItem] = [sharePage]
 
-        // Disable bookmarking and reading list if the URL is too long.
+        // Disable bookmarking if the URL is too long.
         if !tab.urlIsTooLong {
             mainActions.append(isBookmarked ? removeBookmark : bookmarkPage)
-
-            if tab.readerModeAvailableOrActive {
-                mainActions.append(addReadingList)
-            }
         }
 
         // Removing the xrStopAR option until ability to resume session after stopping is added,
         // currently all XR requests launch a new session
-        mainActions.append(contentsOf: [sendToDevice, copyURL, xrToggleDebug, xrSwitchCamera, xrResetTracking, xrReenterFullscreen])
+        mainActions.append(contentsOf: [copyURL, xrToggleDebug, xrSwitchCamera, xrResetTracking, xrReenterFullscreen])
 
         let pinAction = (isPinned ? removeTopSitesPin : pinToTopSites)
         var commonActions = [toggleDesktopSite, pinAction]

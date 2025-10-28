@@ -2,38 +2,79 @@ import SwiftUI
 
 struct AppClipContentView: View {
     @EnvironmentObject private var coordinator: AppClipLaunchCoordinator
-    @Environment(\.openURL) private var openURL
-    @State private var isLaunchingFullApp = false
-    @State private var launchError: String?
+    @State private var requestedURL: URL?
+    @State private var currentURL: URL?
+    @State private var addressBarText: String = ""
+    @State private var canGoBack = false
+    @State private var canGoForward = false
+    @State private var isLoading = false
+    @State private var navigationCommand: AppClipWebView.Command?
+    @State private var showInvalidURLAlert = false
+
+    private let homePageURL = URL(string: "https://swiftglobe-browser.example.com")!
 
     var body: some View {
-        VStack(spacing: 24) {
-            Image(systemName: "globe")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 96, height: 96)
-                .foregroundColor(.accentColor)
+        VStack(spacing: 16) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text("SwiftGlobe Browser")
+                    .font(.title2)
+                    .bold()
+                Text("軽量でプライバシーを重視したブラウザ体験を今すぐお試しください。")
+                    .font(.subheadline)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal)
 
-            Text("SwiftGlobe App Clip")
-                .font(.title)
-                .bold()
+            VStack(spacing: 8) {
+                HStack(spacing: 8) {
+                    TextField("検索またはウェブアドレスを入力", text: $addressBarText, onCommit: openAddressBarInput)
+                        .textFieldStyle(.roundedBorder)
+                        .keyboardType(.URL)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                    if isLoading {
+                        ProgressView()
+                            .progressViewStyle(.circular)
+                    }
+                    Button(action: reloadCurrentPage) {
+                        Image(systemName: "arrow.clockwise")
+                            .imageScale(.medium)
+                    }
+                    .disabled(currentURL == nil)
+                    .buttonStyle(.borderless)
+                }
 
-            Text(descriptionText)
-                .font(.body)
-                .multilineTextAlignment(.center)
-                .padding(.horizontal)
+                HStack(spacing: 16) {
+                    Button(action: goBack) {
+                        Image(systemName: "chevron.backward")
+                            .imageScale(.large)
+                    }
+                    .disabled(!canGoBack)
 
-            Button(action: openFullApp) {
-                if isLaunchingFullApp {
-                    ProgressView()
-                } else {
-                    Text("続きは SwiftGlobe で")
-                        .bold()
-                        .frame(maxWidth: .infinity)
+                    Button(action: goForward) {
+                        Image(systemName: "chevron.forward")
+                            .imageScale(.large)
+                    }
+                    .disabled(!canGoForward)
+
+                    Spacer()
+
+                    if let url = currentURL {
+                        Link("Safari で開く", destination: url)
+                    }
                 }
             }
-            .buttonStyle(.borderedProminent)
-            .disabled(isLaunchingFullApp)
+            .padding(.horizontal)
+
+            AppClipWebView(
+                requestedURL: $requestedURL,
+                currentURL: $currentURL,
+                canGoBack: $canGoBack,
+                canGoForward: $canGoForward,
+                isLoading: $isLoading,
+                navigationCommand: $navigationCommand
+            )
+            .edgesIgnoringSafeArea(.bottom)
 
             VStack(spacing: 4) {
                 Text("SwiftGlobe Browser は Mozilla Firefox をフォークしたオープンソースのブラウザです。")
@@ -47,47 +88,66 @@ struct AppClipContentView: View {
                         .font(.footnote)
                 }
             }
-
-            if let launchError {
-                Text(launchError)
-                    .font(.footnote)
-                    .foregroundColor(.red)
-                    .multilineTextAlignment(.center)
-                    .padding(.horizontal)
-            }
+            .padding(.vertical, 8)
+            .padding(.horizontal)
         }
-        .padding()
-        .onChange(of: coordinator.lastVisitedURL) { _ in
-            launchError = nil
+        .onAppear {
+            loadInitialPage()
+        }
+        .onChange(of: coordinator.lastVisitedURL) { newValue in
+            guard let url = newValue else { return }
+            load(url)
+        }
+        .onChange(of: currentURL) { newURL in
+            guard let newURL else { return }
+            addressBarText = newURL.absoluteString
+        }
+        .alert("ページを開けません", isPresented: $showInvalidURLAlert) {
+            Button("OK", role: .cancel) {}
+        } message: {
+            Text("入力したアドレスを確認してください。")
         }
     }
 
-    private var descriptionText: String {
-        if let lastURL = coordinator.lastVisitedURL {
-            return "直前に開いたページを SwiftGlobe で引き続き表示できます。\n\n" + lastURL.absoluteString
-        }
-        return "SwiftGlobe Browser の軽量版です。フル機能を利用するにはアプリを開いてください。"
+    private func loadInitialPage() {
+        let initialURL = coordinator.lastVisitedURL ?? homePageURL
+        addressBarText = initialURL.absoluteString
+        load(initialURL)
     }
 
-    private func openFullApp() {
-        guard !isLaunchingFullApp else { return }
-        isLaunchingFullApp = true
-        launchError = nil
-
-        guard let destination = coordinator.fallbackURL() else {
-            launchError = "アプリを開くためのリンクを作成できませんでした。"
-            isLaunchingFullApp = false
+    private func openAddressBarInput() {
+        guard let url = normalizedURL(from: addressBarText) else {
+            showInvalidURLAlert = true
             return
         }
+        load(url)
+    }
 
-        openURL(destination) { accepted in
-            DispatchQueue.main.async {
-                self.isLaunchingFullApp = false
-                if !accepted {
-                    self.launchError = "SwiftGlobe アプリを開けませんでした。"
-                }
-            }
+    private func load(_ url: URL) {
+        requestedURL = url
+    }
+
+    private func goBack() {
+        navigationCommand = .goBack
+    }
+
+    private func goForward() {
+        navigationCommand = .goForward
+    }
+
+    private func reloadCurrentPage() {
+        navigationCommand = .reload
+    }
+
+    private func normalizedURL(from input: String) -> URL? {
+        var trimmed = input.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return nil }
+
+        if !trimmed.contains("://") {
+            trimmed = "https://" + trimmed
         }
+
+        return URL(string: trimmed)
     }
 
     private var projectURL: URL? {

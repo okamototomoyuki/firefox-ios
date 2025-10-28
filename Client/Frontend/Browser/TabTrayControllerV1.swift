@@ -53,7 +53,9 @@ class TabTrayControllerV1: UIViewController {
     lazy var toolbar: TrayToolbar = {
         let toolbar = TrayToolbar()
         toolbar.addTabButton.addTarget(self, action: #selector(didTapToolbarAddTab), for: .touchUpInside)
-        toolbar.maskButton.addTarget(self, action: #selector(didTogglePrivateMode), for: .touchUpInside)
+        if SwiftGlobeProductConfiguration.supportsPrivateBrowsing {
+            toolbar.maskButton.addTarget(self, action: #selector(didTogglePrivateMode), for: .touchUpInside)
+        }
         toolbar.deleteButton.addTarget(self, action: #selector(didTapToolbarDelete), for: .touchUpInside)
         return toolbar
     }()
@@ -272,6 +274,14 @@ class TabTrayControllerV1: UIViewController {
         if tabDisplayManager.isDragging {
             return
         }
+        guard SwiftGlobeProductConfiguration.supportsPrivateBrowsing else {
+            if tabDisplayManager.isPrivate {
+                tabDisplayManager.togglePrivateMode(isOn: false, createTabOnEmptyPrivateMode: false)
+                toolbar.maskButton.setSelected(false, animated: false)
+            }
+            return
+        }
+
         toolbar.isUserInteractionEnabled = false
 
         let scaleDownTransform = CGAffineTransform(scaleX: 0.9, y: 0.9)
@@ -512,6 +522,12 @@ extension TabTrayControllerV1 {
     }
 
     func changePrivacyMode(_ isPrivate: Bool) {
+        guard SwiftGlobeProductConfiguration.supportsPrivateBrowsing else {
+            if tabDisplayManager.isPrivate {
+                didTogglePrivateMode()
+            }
+            return
+        }
         if isPrivate != tabDisplayManager.isPrivate {
             didTogglePrivateMode()
         }
@@ -1003,6 +1019,11 @@ class TrayToolbar: UIView, Themeable, PrivateModeUI {
             make.size.equalTo(toolbarButtonSize)
         }
 
+        if !SwiftGlobeProductConfiguration.supportsPrivateBrowsing {
+            maskButton.isHidden = true
+            maskButton.isEnabled = false
+        }
+
         applyTheme()
         applyUIMode(isPrivate: false)
     }
@@ -1012,6 +1033,11 @@ class TrayToolbar: UIView, Themeable, PrivateModeUI {
     }
 
     func applyUIMode(isPrivate: Bool) {
+        guard SwiftGlobeProductConfiguration.supportsPrivateBrowsing else {
+            maskButton.isHidden = true
+            maskButton.isEnabled = false
+            return
+        }
         maskButton.applyUIMode(isPrivate: isPrivate)
     }
 

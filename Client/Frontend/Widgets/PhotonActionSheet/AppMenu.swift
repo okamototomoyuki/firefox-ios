@@ -31,28 +31,32 @@ extension PhotonActionSheetProtocol {
     func getOtherPanelActions(vcDelegate: PageOptionsVC) -> [PhotonActionSheetItem] {
         var items: [PhotonActionSheetItem] = []
 
-        let noImageEnabled = NoImageModeHelper.isActivated(profile.prefs)
-        let noImageMode = PhotonActionSheetItem(title: Strings.AppMenuNoImageMode, iconString: "menu-NoImageMode", isEnabled: noImageEnabled, accessory: .Switch, badgeIconNamed: "menuBadge") { action,_ in
-            NoImageModeHelper.toggle(isEnabled: action.isEnabled, profile: self.profile, tabManager: self.tabManager)
+        if SwiftGlobeProductConfiguration.supportsImageBlocking {
+            let noImageEnabled = NoImageModeHelper.isActivated(profile.prefs)
+            let noImageMode = PhotonActionSheetItem(title: Strings.AppMenuNoImageMode, iconString: "menu-NoImageMode", isEnabled: noImageEnabled, accessory: .Switch, badgeIconNamed: "menuBadge") { action,_ in
+                NoImageModeHelper.toggle(isEnabled: action.isEnabled, profile: self.profile, tabManager: self.tabManager)
+            }
+
+            items.append(noImageMode)
         }
 
-        items.append(noImageMode)
-
-        let nightModeEnabled = NightModeHelper.isActivated(profile.prefs)
-        let nightMode = PhotonActionSheetItem(title: Strings.AppMenuNightMode, iconString: "menu-NightMode", isEnabled: nightModeEnabled, accessory: .Switch) { _, _ in
-            NightModeHelper.toggle(self.profile.prefs, tabManager: self.tabManager)
-            // If we've enabled night mode and the theme is normal, enable dark theme
-            if NightModeHelper.isActivated(self.profile.prefs), ThemeManager.instance.currentName == .normal {
-                ThemeManager.instance.current = DarkTheme()
-                NightModeHelper.setEnabledDarkTheme(self.profile.prefs, darkTheme: true)
+        if SwiftGlobeProductConfiguration.supportsNightMode {
+            let nightModeEnabled = NightModeHelper.isActivated(profile.prefs)
+            let nightMode = PhotonActionSheetItem(title: Strings.AppMenuNightMode, iconString: "menu-NightMode", isEnabled: nightModeEnabled, accessory: .Switch) { _, _ in
+                NightModeHelper.toggle(self.profile.prefs, tabManager: self.tabManager)
+                // If we've enabled night mode and the theme is normal, enable dark theme
+                if NightModeHelper.isActivated(self.profile.prefs), ThemeManager.instance.currentName == .normal {
+                    ThemeManager.instance.current = DarkTheme()
+                    NightModeHelper.setEnabledDarkTheme(self.profile.prefs, darkTheme: true)
+                }
+                // If we've disabled night mode and dark theme was activated by it then disable dark theme
+                if !NightModeHelper.isActivated(self.profile.prefs), NightModeHelper.hasEnabledDarkTheme(self.profile.prefs), ThemeManager.instance.currentName == .dark {
+                    ThemeManager.instance.current = NormalTheme()
+                    NightModeHelper.setEnabledDarkTheme(self.profile.prefs, darkTheme: false)
+                }
             }
-            // If we've disabled night mode and dark theme was activated by it then disable dark theme
-            if !NightModeHelper.isActivated(self.profile.prefs), NightModeHelper.hasEnabledDarkTheme(self.profile.prefs), ThemeManager.instance.currentName == .dark {
-                ThemeManager.instance.current = NormalTheme()
-                NightModeHelper.setEnabledDarkTheme(self.profile.prefs, darkTheme: false)
-            }
+            items.append(nightMode)
         }
-        items.append(nightMode)
 
         let openSettings = PhotonActionSheetItem(title: Strings.AppMenuSettingsTitleString, iconString: "menu-Settings") { _, _ in
             let settingsTableViewController = AppSettingsTableViewController()
@@ -79,7 +83,7 @@ extension PhotonActionSheetProtocol {
     }
 
     func syncMenuButton(showFxA: @escaping (_ params: FxALaunchParams?, _ flowType: FxAPageType,_ referringPage: ReferringPage) -> Void) -> PhotonActionSheetItem? {
-        //profile.getAccount()?.updateProfile()
+        guard SwiftGlobeProductConfiguration.supportsFirefoxAccount else { return nil }
 
         let action: ((PhotonActionSheetItem, UITableViewCell) -> Void) = { action,_ in
             let fxaParams = FxALaunchParams(query: ["entrypoint": "browsermenu"])

@@ -993,10 +993,11 @@ class BrowserViewController: UIViewController {
 
     // MARK: Opening New Tabs
     func switchToPrivacyMode(isPrivate: Bool) {
-         if let tabTrayController = self.tabTrayController, tabTrayController.tabDisplayManager.isPrivate != isPrivate {
-            tabTrayController.changePrivacyMode(isPrivate)
+        let targetIsPrivate = SwiftGlobeProductConfiguration.supportsPrivateBrowsing ? isPrivate : false
+        if let tabTrayController = self.tabTrayController, tabTrayController.tabDisplayManager.isPrivate != targetIsPrivate {
+            tabTrayController.changePrivacyMode(targetIsPrivate)
         }
-        topTabsViewController?.applyUIMode(isPrivate: isPrivate)
+        topTabsViewController?.applyUIMode(isPrivate: targetIsPrivate)
     }
 
     func switchToTabForURLOrOpen(_ url: URL, isPrivate: Bool = false) {
@@ -1019,8 +1020,9 @@ class BrowserViewController: UIViewController {
             request = nil
         }
 
-        switchToPrivacyMode(isPrivate: isPrivate)
-        tabManager.selectTab(tabManager.addTab(request, isPrivate: isPrivate))
+        let targetIsPrivate = SwiftGlobeProductConfiguration.supportsPrivateBrowsing ? isPrivate : false
+        switchToPrivacyMode(isPrivate: targetIsPrivate)
+        tabManager.selectTab(tabManager.addTab(request, isPrivate: targetIsPrivate))
     }
 
     func focusLocationTextField(forTab tab: Tab?, setSearchText searchText: String? = nil) {

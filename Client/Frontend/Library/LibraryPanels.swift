@@ -69,50 +69,64 @@ class LibraryPanels {
         self.profile = profile
     }
 
-    lazy var enabledPanels = [
-        LibraryPanelDescriptor(
-            makeViewController: { profile in
-                return BookmarksPanel(profile: profile)
-            },
-            profile: profile,
-            imageName: "Bookmarks",
-            accessibilityLabel: NSLocalizedString("Bookmarks", comment: "Panel accessibility label"),
-            accessibilityIdentifier: "LibraryPanels.Bookmarks"),
+    lazy var enabledPanels: [LibraryPanelDescriptor] = {
+        var panels: [LibraryPanelDescriptor] = [
+            LibraryPanelDescriptor(
+                makeViewController: { profile in
+                    return BookmarksPanel(profile: profile)
+                },
+                profile: profile,
+                imageName: "Bookmarks",
+                accessibilityLabel: NSLocalizedString("Bookmarks", comment: "Panel accessibility label"),
+                accessibilityIdentifier: "LibraryPanels.Bookmarks"),
 
-        LibraryPanelDescriptor(
-            makeViewController: { profile in
-                return HistoryPanel(profile: profile)
-            },
-            profile: profile,
-            imageName: "History",
-            accessibilityLabel: NSLocalizedString("History", comment: "Panel accessibility label"),
-            accessibilityIdentifier: "LibraryPanels.History"),
+            LibraryPanelDescriptor(
+                makeViewController: { profile in
+                    return HistoryPanel(profile: profile)
+                },
+                profile: profile,
+                imageName: "History",
+                accessibilityLabel: NSLocalizedString("History", comment: "Panel accessibility label"),
+                accessibilityIdentifier: "LibraryPanels.History")
+        ]
 
-        LibraryPanelDescriptor(
-            makeViewController: { profile in
-                return ReadingListPanel(profile: profile)
-            },
-            profile: profile,
-            imageName: "ReadingList",
-            accessibilityLabel: NSLocalizedString("Reading list", comment: "Panel accessibility label"),
-            accessibilityIdentifier: "LibraryPanels.ReadingList"),
+        if SwiftGlobeProductConfiguration.supportsReadingList {
+            panels.append(
+                LibraryPanelDescriptor(
+                    makeViewController: { profile in
+                        return ReadingListPanel(profile: profile)
+                    },
+                    profile: profile,
+                    imageName: "ReadingList",
+                    accessibilityLabel: NSLocalizedString("Reading list", comment: "Panel accessibility label"),
+                    accessibilityIdentifier: "LibraryPanels.ReadingList")
+            )
+        }
 
-        LibraryPanelDescriptor(
-            makeViewController: { profile in
-                return DownloadsPanel(profile: profile)
-            },
-            profile: profile,
-            imageName: "Downloads",
-            accessibilityLabel: NSLocalizedString("Downloads", comment: "Panel accessibility label"),
-            accessibilityIdentifier: "LibraryPanels.Downloads"),
+        panels.append(
+            LibraryPanelDescriptor(
+                makeViewController: { profile in
+                    return DownloadsPanel(profile: profile)
+                },
+                profile: profile,
+                imageName: "Downloads",
+                accessibilityLabel: NSLocalizedString("Downloads", comment: "Panel accessibility label"),
+                accessibilityIdentifier: "LibraryPanels.Downloads")
+        )
 
-        LibraryPanelDescriptor(
-            makeViewController: { profile in
-                return RemoteTabsPanel(profile: profile)
-            },
-            profile: profile,
-            imageName: "SyncedTabs",
-            accessibilityLabel: NSLocalizedString("Synced Tabs", comment: "Panel accessibility label"),
-            accessibilityIdentifier: "LibraryPanels.SyncedTabs"),
-    ]
+        if SwiftGlobeProductConfiguration.supportsSyncedTabs {
+            panels.append(
+                LibraryPanelDescriptor(
+                    makeViewController: { profile in
+                        return RemoteTabsPanel(profile: profile)
+                    },
+                    profile: profile,
+                    imageName: "SyncedTabs",
+                    accessibilityLabel: NSLocalizedString("Synced Tabs", comment: "Panel accessibility label"),
+                    accessibilityIdentifier: "LibraryPanels.SyncedTabs")
+            )
+        }
+
+        return panels
+    }()
 }

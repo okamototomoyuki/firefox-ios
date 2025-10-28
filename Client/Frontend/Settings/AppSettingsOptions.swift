@@ -59,6 +59,10 @@ class ConnectSetting: WithoutAccountSetting {
         cell.imageView?.layer.cornerRadius = (cell.imageView?.frame.size.width)! / 2
         cell.imageView?.layer.masksToBounds = true
     }
+
+    override var hidden: Bool {
+        return !SwiftGlobeProductConfiguration.supportsFirefoxAccount
+    }
 }
 
 class SyncNowSetting: WithAccountSetting {
@@ -164,7 +168,9 @@ class SyncNowSetting: WithAccountSetting {
         return attributedString
     }
 
-    override var hidden: Bool { return !enabled }
+    override var hidden: Bool {
+        return !SwiftGlobeProductConfiguration.supportsFirefoxAccount || !enabled
+    }
 
     override var enabled: Bool {
         get {

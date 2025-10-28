@@ -507,7 +507,15 @@ extension FirefoxHomeViewController {
 
     func configureLibraryShortcutsCell(_ cell: UICollectionViewCell, forIndexPath indexPath: IndexPath) -> UICollectionViewCell {
         let libraryCell = cell as! ASLibraryCell
-        let targets = [#selector(openBookmarks), #selector(openReadingList), #selector(openDownloads), #selector(openSyncedTabs)]
+        var targets: [Selector] = [#selector(openBookmarks)]
+        if SwiftGlobeProductConfiguration.supportsReadingList {
+            targets.append(#selector(openReadingList))
+        }
+        targets.append(#selector(openDownloads))
+        if SwiftGlobeProductConfiguration.supportsSyncedTabs {
+            targets.append(#selector(openSyncedTabs))
+        }
+
         libraryCell.libraryButtons.map({ $0.button }).zip(targets).forEach { (button, selector) in
             button.removeTarget(nil, action: nil, for: .allEvents)
             button.addTarget(self, action: selector, for: .touchUpInside)
@@ -1095,7 +1103,18 @@ class ASLibraryCell: UICollectionViewCell, Themeable {
             make.edges.equalTo(self)
         }
 
-        [bookmarks, readingList, downloads, syncedTabs].forEach { item in
+        let availablePanels: [LibraryPanel] = {
+            var panels: [LibraryPanel] = [bookmarks, downloads]
+            if SwiftGlobeProductConfiguration.supportsReadingList {
+                panels.insert(readingList, at: 1)
+            }
+            if SwiftGlobeProductConfiguration.supportsSyncedTabs {
+                panels.append(syncedTabs)
+            }
+            return panels
+        }()
+
+        availablePanels.forEach { item in
             let view = LibraryShortcutView()
             view.button.setImage(item.image, for: .normal)
             view.title.text = item.title

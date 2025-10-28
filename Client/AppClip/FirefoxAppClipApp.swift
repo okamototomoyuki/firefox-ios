@@ -28,19 +28,4 @@ final class AppClipLaunchCoordinator: ObservableObject {
             self.lastVisitedURL = url
         }
     }
-
-    func fallbackURL() -> URL? {
-        guard let lastVisitedURL else {
-            return URL(string: "https://swiftglobe-browser.example.com")
-        }
-
-        var components = URLComponents()
-        components.scheme = "swiftglobe"
-        components.host = "open-url"
-        components.queryItems = [
-            URLQueryItem(name: "url", value: lastVisitedURL.absoluteString)
-        ]
-
-        return components.url
-    }
 }

@@ -83,6 +83,13 @@ class ReaderModeBarView: UIView {
             make.height.centerY.equalTo(self)
             make.width.equalTo(80)
         }
+
+        if !SwiftGlobeProductConfiguration.supportsReadingList {
+            readStatusButton.isHidden = true
+            readStatusButton.isEnabled = false
+            listStatusButton.isHidden = true
+            listStatusButton.isEnabled = false
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -114,6 +121,7 @@ class ReaderModeBarView: UIView {
     }
 
     @objc func tappedReadStatusButton(_ sender: UIButton!) {
+        guard SwiftGlobeProductConfiguration.supportsReadingList else { return }
         UnifiedTelemetry.recordEvent(category: .action, method: .tap, object: .readingListItem, value: unread ? .markAsRead : .markAsUnread, extras: [ "from": "reader-mode-toolbar" ])
         delegate?.readerModeBar(self, didSelectButton: unread ? .markAsRead : .markAsUnread)
     }
@@ -123,12 +131,14 @@ class ReaderModeBarView: UIView {
     }
 
     @objc func tappedListStatusButton(_ sender: UIButton!) {
+        guard SwiftGlobeProductConfiguration.supportsReadingList else { return }
         UnifiedTelemetry.recordEvent(category: .action, method: added ? .delete : .add, object: .readingListItem, value: .readerModeToolbar)
         delegate?.readerModeBar(self, didSelectButton: added ? .removeFromReadingList : .addToReadingList)
     }
 
     var unread: Bool = true {
         didSet {
+            guard SwiftGlobeProductConfiguration.supportsReadingList else { return }
             let buttonType: ReaderModeBarButtonType = unread && added ? .markAsRead : .markAsUnread
             readStatusButton.setImage(buttonType.image, for: [])
             readStatusButton.isEnabled = added
@@ -138,6 +148,7 @@ class ReaderModeBarView: UIView {
 
     var added: Bool = false {
         didSet {
+            guard SwiftGlobeProductConfiguration.supportsReadingList else { return }
             let buttonType: ReaderModeBarButtonType = added ? .removeFromReadingList : .addToReadingList
             listStatusButton.setImage(buttonType.image, for: [])
         }

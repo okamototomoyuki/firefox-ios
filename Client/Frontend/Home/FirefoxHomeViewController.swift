@@ -507,14 +507,11 @@ extension FirefoxHomeViewController {
 
     func configureLibraryShortcutsCell(_ cell: UICollectionViewCell, forIndexPath indexPath: IndexPath) -> UICollectionViewCell {
         let libraryCell = cell as! ASLibraryCell
-        var targets: [Selector] = [#selector(openBookmarks)]
-        if SwiftGlobeProductConfiguration.supportsReadingList {
-            targets.append(#selector(openReadingList))
-        }
-        targets.append(#selector(openDownloads))
-        if SwiftGlobeProductConfiguration.supportsSyncedTabs {
-            targets.append(#selector(openSyncedTabs))
-        }
+        let targets: [Selector] = [
+            #selector(openBookmarks),
+            #selector(openHistory),
+            #selector(openDownloads)
+        ]
 
         libraryCell.libraryButtons.map({ $0.button }).zip(targets).forEach { (button, selector) in
             button.removeTarget(nil, action: nil, for: .allEvents)
@@ -738,14 +735,6 @@ extension FirefoxHomeViewController {
 
     @objc func openHistory() {
         homePanelDelegate?.homePanelDidRequestToOpenLibrary(panel: .history)
-    }
-
-    @objc func openSyncedTabs() {
-        homePanelDelegate?.homePanelDidRequestToOpenLibrary(panel: .syncedTabs)
-    }
-
-    @objc func openReadingList() {
-        homePanelDelegate?.homePanelDidRequestToOpenLibrary(panel: .readingList)
     }
 
     @objc func openDownloads() {
@@ -1090,9 +1079,7 @@ class ASLibraryCell: UICollectionViewCell, Themeable {
 
     let bookmarks = LibraryPanel(title: Strings.AppMenuBookmarksTitleString, image: UIImage.templateImageNamed("menu-Bookmark"), color: UIColor.Photon.Blue50)
     let history = LibraryPanel(title: Strings.AppMenuHistoryTitleString, image: UIImage.templateImageNamed("menu-panel-History"), color: UIColor.Photon.Orange50)
-    let readingList = LibraryPanel(title: Strings.AppMenuReadingListTitleString, image: UIImage.templateImageNamed("menu-panel-ReadingList"), color: UIColor.Photon.Teal60)
     let downloads = LibraryPanel(title: Strings.AppMenuDownloadsTitleString, image: UIImage.templateImageNamed("menu-panel-Downloads"), color: UIColor.Photon.Magenta60)
-    let syncedTabs = LibraryPanel(title: Strings.AppMenuSyncedTabsTitleString, image: UIImage.templateImageNamed("menu-sync"), color: UIColor.Photon.Purple70)
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -1103,16 +1090,7 @@ class ASLibraryCell: UICollectionViewCell, Themeable {
             make.edges.equalTo(self)
         }
 
-        let availablePanels: [LibraryPanel] = {
-            var panels: [LibraryPanel] = [bookmarks, downloads]
-            if SwiftGlobeProductConfiguration.supportsReadingList {
-                panels.insert(readingList, at: 1)
-            }
-            if SwiftGlobeProductConfiguration.supportsSyncedTabs {
-                panels.append(syncedTabs)
-            }
-            return panels
-        }()
+        let availablePanels: [LibraryPanel] = [bookmarks, history, downloads]
 
         availablePanels.forEach { item in
             let view = LibraryShortcutView()

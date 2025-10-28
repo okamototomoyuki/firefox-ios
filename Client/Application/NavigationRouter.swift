@@ -132,7 +132,7 @@ enum NavigationPath {
     }
 
     private static func handleFxA(params: FxALaunchParams, with bvc: BrowserViewController) {
-        bvc.presentSignInViewController(params)
+        // Firefox Account integration is not supported.
     }
     
     private static func handleGlean(url: URL) {
@@ -143,10 +143,10 @@ enum NavigationPath {
         switch panel {
         case .bookmarks: bvc.showLibrary(panel: .bookmarks)
         case .history: bvc.showLibrary(panel: .history)
-        case .readingList: bvc.showLibrary(panel: .readingList)
+        case .readingList: bvc.showLibrary(panel: .bookmarks)
         case .downloads: bvc.showLibrary(panel: .downloads)
         case .topSites: bvc.openURLInNewTab(HomePanelType.topSites.internalUrl)
-        case .newPrivateTab: bvc.openBlankNewTab(focusLocationField: false, isPrivate: true)
+        case .newPrivateTab: bvc.openBlankNewTab(focusLocationField: false, isPrivate: false)
         }
     }
 

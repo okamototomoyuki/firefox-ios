@@ -14,7 +14,7 @@ struct AppClipContentView: View {
                 .frame(width: 96, height: 96)
                 .foregroundColor(.accentColor)
 
-            Text("Firefox App Clip")
+            Text("SwiftGlobe App Clip")
                 .font(.title)
                 .bold()
 
@@ -27,13 +27,26 @@ struct AppClipContentView: View {
                 if isLaunchingFullApp {
                     ProgressView()
                 } else {
-                    Text("続きは Firefox で")
+                    Text("続きは SwiftGlobe で")
                         .bold()
                         .frame(maxWidth: .infinity)
                 }
             }
             .buttonStyle(.borderedProminent)
             .disabled(isLaunchingFullApp)
+
+            VStack(spacing: 4) {
+                Text("SwiftGlobe Browser は Mozilla Firefox をフォークしたオープンソースのブラウザです。")
+                    .font(.footnote)
+                    .multilineTextAlignment(.center)
+                Text("MPL 2.0 のライセンスに基づいて無料で提供し、ソースコードは GitHub で公開しています。")
+                    .font(.footnote)
+                    .multilineTextAlignment(.center)
+                if let projectURL = projectURL {
+                    Link("ソースコードとライセンスを確認", destination: projectURL)
+                        .font(.footnote)
+                }
+            }
 
             if let launchError {
                 Text(launchError)
@@ -51,9 +64,9 @@ struct AppClipContentView: View {
 
     private var descriptionText: String {
         if let lastURL = coordinator.lastVisitedURL {
-            return "直前に開いたページを Firefox で引き続き表示できます。\n\n" + lastURL.absoluteString
+            return "直前に開いたページを SwiftGlobe で引き続き表示できます。\n\n" + lastURL.absoluteString
         }
-        return "Firefox の軽量版です。フル機能を利用するにはアプリを開いてください。"
+        return "SwiftGlobe Browser の軽量版です。フル機能を利用するにはアプリを開いてください。"
     }
 
     private func openFullApp() {
@@ -71,10 +84,14 @@ struct AppClipContentView: View {
             DispatchQueue.main.async {
                 self.isLaunchingFullApp = false
                 if !accepted {
-                    self.launchError = "Firefox アプリを開けませんでした。"
+                    self.launchError = "SwiftGlobe アプリを開けませんでした。"
                 }
             }
         }
+    }
+
+    private var projectURL: URL? {
+        URL(string: "https://github.com/your-org/swiftglobe-browser")
     }
 }
 

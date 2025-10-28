@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct FirefoxAppClipApp: App {
+struct SwiftGlobeAppClipApp: App {
     @StateObject private var coordinator = AppClipLaunchCoordinator()
 
     var body: some Scene {
@@ -31,11 +31,11 @@ final class AppClipLaunchCoordinator: ObservableObject {
 
     func fallbackURL() -> URL? {
         guard let lastVisitedURL else {
-            return URL(string: "firefox://")
+            return URL(string: "https://swiftglobe-browser.example.com")
         }
 
         var components = URLComponents()
-        components.scheme = "firefox"
+        components.scheme = "swiftglobe"
         components.host = "open-url"
         components.queryItems = [
             URLQueryItem(name: "url", value: lastVisitedURL.absoluteString)
